@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>EmployeeService后台 - 热饭管理</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+  <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>热饭管理
+            <small class="m-l-sm"></small>
+          </h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content" style="display: block;">
+          <form method="get" class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-1 control-label">昵称:</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" name="nickname" id="nickname">
+              </div>
+
+              <label class="col-sm-1 control-label">区域:</label>
+              <div class="col-sm-2">
+                <select class="form-control m-b" name="zone" id="zone">
+                  <option value="0">西区</option>
+                  <option value="1">东区</option>
+                </select>
+              </div>
+
+              <label class="col-sm-1 control-label">热饭状态:</label>
+              <div class="col-sm-2">
+                <select class="form-control m-b" name="heat" id="heat">
+                  <option value="0">正在等待</option>
+                  <option value="1">正在热饭</option>
+                  <option value="2">热饭完成</option>
+                </select>
+              </div>
+
+              <button class="btn btn-primary" style="margin-left: 70px;" type="button"><i
+                  class="fa fa-search"></i>&nbsp;提交
+              </button>
+              <button class="btn btn-warning" style="margin-left: 15px;" type="button"><i
+                  class="fa fa-repeat"></i>&nbsp;重置
+              </button>
+            </div>
+          </form>
+
+          <div class="example">
+            <div class="bootstrap-table">
+              <div class="fixed-table-container" style="height: 287px; padding-bottom: 37px;">
+                <div class="fixed-table-body">
+                  <table id="exampleTablePagination" style="margin-top: 10px;" data-toggle="table" data-url="" data-query-params="queryParams" data-mobile-responsive="true" data-height="400" data-pagination="true" data-icon-size="outline" data-search="true" class="table table-hover">
+                    <thead>
+                    <tr>
+                      <th style="" data-field="id" tabindex="0">
+                        <div class="th-inner ">ID</div>
+                        <div class="fht-cell"></div>
+                      </th>
+                      <th style="" data-field="name" tabindex="0">
+                        <div class="th-inner ">名称</div>
+                        <div class="fht-cell"></div>
+                      </th>
+                      <th style="" data-field="price" tabindex="0">
+                        <div class="th-inner ">价格</div>
+                        <div class="fht-cell"></div>
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-index="0">
+                      <td style="">0</td>
+                      <td style="">测试0</td>
+                      <td style="">¥0</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="fixed-table-footer" style="display: none;">
+                  <table>
+                    <tbody>
+                    <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="fixed-table-pagination" style="display: block;">
+                  <div class="pull-left pagination-detail">
+                    <span class="pagination-info">显示第 1 到第 10 条记录，总共 21 条记录</span>
+                    <span class="page-list">每页显示 <span class="btn-group dropup">
+                                            <button
+                                                type="button"
+                                                class="btn btn-default  btn-outline dropdown-toggle"
+                                                data-toggle="dropdown"><span
+                                                class="page-size">10</span> <span
+                                                class="caret"></span></button><ul
+                        class="dropdown-menu" role="menu"><li class="active"><a
+                        href="javascript:void(0)">10</a></li><li><a
+                        href="javascript:void(0)">25</a></li></ul></span> 条记录</span>
+                  </div>
+                  <div class="pull-right pagination">
+                    <ul class="pagination pagination-outline">
+                      <li class="page-first disabled"><a href="javascript:void(0)">«</a></li>
+                      <li class="page-pre disabled"><a href="javascript:void(0)">‹</a></li>
+                      <li class="page-number active"><a href="javascript:void(0)">1</a></li>
+                      <li class="page-number"><a href="javascript:void(0)">2</a></li>
+                      <li class="page-number"><a href="javascript:void(0)">3</a></li>
+                      <li class="page-next"><a href="javascript:void(0)">›</a></li>
+                      <li class="page-last"><a href="javascript:void(0)">»</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/content.js?v=1.0.0"></script>
+</body>
+</html>
