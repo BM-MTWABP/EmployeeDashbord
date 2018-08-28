@@ -1,6 +1,5 @@
 package com.bmmtwabp.employeedashbord.dao;
 
-import com.bmmtwabp.employeedashbord.domain.AdminUser;
 import com.bmmtwabp.employeedashbord.vo.AdminUserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
