@@ -15,4 +15,21 @@
      SELECT * FROM user
   </select>
 
+  <select id="getUserCountByOpenId" resultType="int">
+    SELECT COUNT(*) FROM `user` u
+    WHERE u.open_id=#{openId}
+  </select>
+
+  <insert id="insertUser" keyProperty="id" useGeneratedKeys="true"
+    parameterType="com.bmmtwabp.employeedashbord.domain.User">
+    INSERT INTO user
+    (open_id,nickname,user_img,zone)
+    VALUES(#{openId},#{nickName},#{userImgPath},#{zone})
+  </insert>
+
+  <select id="getUserHeatStatusByToday" resultType="int">
+    SELECT heat_status FROM heating heat
+    WHERE heat.open_id=#{openId} AND heat.start_time LIKE CONCAT('%',#{startTime},'%')
+  </select>
+
 </mapper>

@@ -41,10 +41,11 @@ public class ResponseVo extends HashMap<String, Object> {
         ;
   }
 
-  public static ResponseVo ok(Object msg) {
+  public static ResponseVo ok(Object msg, Object data) {
     ResponseVo responseVo = new ResponseVo();
     responseVo.put("code", SUCCESS);
     responseVo.put("msg", msg);
+    responseVo.put("data", data);
     return responseVo
         ;
   }

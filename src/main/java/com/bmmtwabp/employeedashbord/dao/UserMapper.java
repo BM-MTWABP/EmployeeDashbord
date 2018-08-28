@@ -1,5 +1,7 @@
 package com.bmmtwabp.employeedashbord.dao;
 
+import com.bmmtwabp.employeedashbord.domain.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,5 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
+  Integer insertUser(User user);
+
+  Integer getUserCountByOpenId(@Param("openId") String openId);
+
+  Integer getUserHeatStatusByToday(@Param("openId") String openId,
+      @Param("startTime") String startTime);
 
 }

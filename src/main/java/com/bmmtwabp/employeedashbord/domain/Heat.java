@@ -5,22 +5,18 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
- * @Description: 用户-domain
+ * @Description: 热饭-domain
  * @Param:
  * @return:
  * @Author: fenghouzhi
- * @Date: 2018/8/27
+ * @Date: 2018/8/28
  */
-@Table(name = "user")
+@Table(name = "heating")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class User implements Serializable {
+public class Heat implements Serializable {
 
   private static final long serialVersionUID = -3245478690496182643L;
 
@@ -34,15 +30,19 @@ public class User implements Serializable {
   private String openId;
 
   @Id
-  @Column(name = "nickname")
-  private String nickName;
+  @Column(name = "start_time")
+  private String startTime;
 
   @Id
-  @Column(name = "user_img")
-  private String userImgPath;
+  @Column(name = "end_time")
+  private String endTime;
+
+  @Id
+  @Column(name = "heat_status")
+  private Integer heatStatus;
 
   @Id
   @Column(name = "zone")
-  private Integer zone;
+  private String zone;
 
 }

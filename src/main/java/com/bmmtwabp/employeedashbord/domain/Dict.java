@@ -5,22 +5,18 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
- * @Description: 用户-domain
+ * @Description: 字典项-domain
  * @Param:
  * @return:
  * @Author: fenghouzhi
- * @Date: 2018/8/27
+ * @Date: 2018/8/28
  */
-@Table(name = "user")
+@Table(name = "dict")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class User implements Serializable {
+public class Dict implements Serializable {
 
   private static final long serialVersionUID = -3245478690496182643L;
 
@@ -30,19 +26,15 @@ public class User implements Serializable {
   private Long id;
 
   @Id
-  @Column(name = "open_id")
-  private String openId;
+  @Column(name = "dict_type")
+  private String dictType;
 
   @Id
-  @Column(name = "nickname")
-  private String nickName;
+  @Column(name = "dict_value")
+  private String dictValue;
 
   @Id
-  @Column(name = "user_img")
-  private String userImgPath;
-
-  @Id
-  @Column(name = "zone")
-  private Integer zone;
+  @Column(name = "dict_name")
+  private String dictName;
 
 }

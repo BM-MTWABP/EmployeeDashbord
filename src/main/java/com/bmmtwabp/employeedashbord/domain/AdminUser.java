@@ -18,6 +18,8 @@ import lombok.Data;
 @Data
 public class AdminUser implements Serializable {
 
+  private static final long serialVersionUID = -3245478690496182643L;
+
   @Id
   @GeneratedValue(generator = "JDBC")
   @Column(name = "id")

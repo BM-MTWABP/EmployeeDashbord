@@ -7,6 +7,13 @@ import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+/**
+ * @Description: 管理员-service实现类
+ * @Param:
+ * @return:
+ * @Author: fenghouzhi
+ * @Date: 2018/8/28
+ */
 @Slf4j
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
