@@ -85,7 +85,7 @@ public class HeatController extends BaseController {
     if (heatingNickName != null && !"".equals(heatingNickName)) {
       return ResponseVo.ok("获取成功!", heatingNickName);
     } else {
-      return ResponseVo.warn("当前没有人热饭！");
+      return ResponseVo.warn("当前没有人热饭");
     }
 
   }

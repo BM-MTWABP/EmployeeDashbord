@@ -87,6 +87,39 @@ function getEastMicrowaveInfo() {
 }
 
 /**
+ * 获取正在热饭的用户昵称
+ */
+function getWestHeatingNickName() {
+  $.ajax({
+    url: 'heat/heating/' + westZoneName,
+    type: 'GET',
+    data: {},
+    success: function (res) {
+      if (res.code == '200') {
+        $("h2[name='westHeatingNickName']").text(res.data);
+      } else {
+        $("h2[name='westHeatingNickName']").text(res.msg);
+      }
+    }
+  });
+}
+
+function getEastHeatingNickName() {
+  $.ajax({
+    url: 'heat/heating/' + eastZoneName,
+    type: 'GET',
+    data: {},
+    success: function (res) {
+      if (res.code == '200') {
+        $("h2[name='eastHeatingNickName']").text(res.data);
+      } else {
+        $("h2[name='eastHeatingNickName']").text(res.msg);
+      }
+    }
+  });
+}
+
+/**
  * 获取等待人数
  */
 function getWestWaitHeatSum() {
@@ -114,39 +147,6 @@ function getEastWaitHeatSum() {
         $("h1[name='eastWaitHeatSum']").text(res.data);
       } else {
         console.log(res);
-      }
-    }
-  });
-}
-
-/**
- * 获取正在热饭的用户昵称
- */
-function getWestHeatingNickName() {
-  $.ajax({
-    url: 'heat/heating/' + westZoneName,
-    type: 'GET',
-    data: {},
-    success: function (res) {
-      if (res.code == '200') {
-        $("h2[name='westHeatingNickName']").text(res.data);
-      } else {
-        $("h2[name='westHeatingNickName']").text('当前没有人热饭！');
-      }
-    }
-  });
-}
-
-function getEastHeatingNickName() {
-  $.ajax({
-    url: 'heat/heating/' + eastZoneName,
-    type: 'GET',
-    data: {},
-    success: function (res) {
-      if (res.code == '200') {
-        $("h2[name='eastHeatingNickName']").text(res.data);
-      } else {
-        $("h2[name='eastHeatingNickName']").text('当前没有人热饭！');
       }
     }
   });
