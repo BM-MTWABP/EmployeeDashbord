@@ -85,6 +85,27 @@ public class HeatController extends BaseController {
   }
 
   /**
+   * 小程序-获取结束热饭列表
+   */
+  @ApiOperation(value = "小程序-热饭列表")
+  @GetMapping("/app/heats/{zoneName}")
+  @ResponseBody
+  ResponseVo getHeatListForApp(@PathVariable String zoneName) {
+    log.info("zone:   " + zoneName);
+
+    if (zoneName == null || "".equals(zoneName)) {
+      return ResponseVo.error("zoneName未传入!!!");
+    }
+
+    List<HeatVo> heatVoList = heatService.getHeatListForApp(zoneName);
+    if (heatVoList != null && heatVoList.size() > 0) {
+      return ResponseVo.ok("获取成功", heatVoList);
+    } else {
+      return ResponseVo.ok("列表为空", null);
+    }
+  }
+
+  /**
    * 小程序-进入热饭等待队列
    */
   @ApiOperation(value = "进入热饭等待队列")
@@ -147,27 +168,6 @@ public class HeatController extends BaseController {
       return ResponseVo.error("您未正常结束热饭~~");
     }
 
-  }
-
-  /**
-   * 小程序-获取结束热饭列表
-   */
-  @ApiOperation(value = "小程序-热饭列表")
-  @GetMapping("/app/heats")
-  @ResponseBody
-  ResponseVo getHeatListForApp(String zoneName) {
-    log.info("zone:   " + zoneName);
-
-    if (zoneName == null || "".equals(zoneName)) {
-      return ResponseVo.error("zoneName未传入!!!");
-    }
-
-    List<HeatVo> heatVoList = heatService.getHeatListForApp(zoneName);
-    if (heatVoList != null && heatVoList.size() > 0) {
-      return ResponseVo.ok("获取成功", heatVoList);
-    } else {
-      return ResponseVo.ok("列表为空", null);
-    }
   }
 
 }
