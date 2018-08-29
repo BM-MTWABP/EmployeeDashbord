@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bmmtwabp.employeedashbord.dao.MicroWaveMapper">
+
+  <resultMap id="BaseResultMap" type="com.bmmtwabp.employeedashbord.domain.MicroWave">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="microwave_name" jdbcType="VARCHAR" property="microwaveName"/>
+    <result column="microwave_status" jdbcType="INTEGER" property="microwaveStatus"/>
+    <result column="zone" jdbcType="VARCHAR" property="zone"/>
+  </resultMap>
+
+  <select id="getMicroWaveInfo" resultMap="BaseResultMap">
+    SELECT * FROM microwave;
+  </select>
+
+  <select id="getMicroWaveVos" resultType="com.bmmtwabp.employeedashbord.vo.MicroWaveVo">
+    SELECT mw.id as mwId,mw.microwave_name as microwaveName,
+    mw.microwave_status as microwaveStatus,dc.dict_name as microwaveStatusName,
+    mw.zone as zoneName
+    FROM microwave mw
+    INNER JOIN dict dc ON dc.dict_value=mw.microwave_status
+    WHERE dc.dict_type='micorwave';
+  </select>
+
+  <select id="getMicroWaveInfoByZone" resultType="com.bmmtwabp.employeedashbord.vo.MicroWaveVo">
+    SELECT mw.id as mwId,mw.microwave_name as microwaveName,
+    mw.microwave_status as microwaveStatus,dc.dict_name as microwaveStatusName,
+    mw.zone as zoneName
+    FROM microwave mw
+    INNER JOIN dict dc ON dc.dict_value=mw.microwave_status
+    WHERE mw.zone=#{zoneName} AND dc.dict_type='micorwave';
+  </select>
+
+</mapper>

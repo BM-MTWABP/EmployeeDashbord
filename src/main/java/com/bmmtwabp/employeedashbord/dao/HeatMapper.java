@@ -12,6 +12,8 @@ public interface HeatMapper {
 
   List<Heat> getHeatInfo();
 
+  Heat getHeatInfoByOpenId(@Param("openId") String openId);
+
   Integer insertHeat(Heat heat);
 
   Integer readyHeat(@Param("openId") String openId);
@@ -23,5 +25,9 @@ public interface HeatMapper {
   List<HeatVo> getHeatVoList(QueryHeatVo queryHeatVo);
 
   List<HeatVo> getHeatListForApp(@Param("zoneName") String zoneName);
+
+  String getWaitFirstHeatUserOpenId(@Param("zoneName") String zoneName);
+
+  Integer getHistoryHeatSum(@Param("zoneName") String zoneName);
 
 }

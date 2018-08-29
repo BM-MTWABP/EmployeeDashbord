@@ -2,6 +2,7 @@ package com.bmmtwabp.employeedashbord.controller;
 
 import com.bmmtwabp.employeedashbord.service.UserService;
 import com.bmmtwabp.employeedashbord.util.ResponseVo;
+import com.bmmtwabp.employeedashbord.vo.AppLoginVo;
 import com.bmmtwabp.employeedashbord.vo.UserStatusVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -31,9 +33,15 @@ public class UserController {
   @ApiOperation(value = "小程序登录接口")
   @PostMapping("/app/login")
   @ResponseBody
-  ResponseVo getUserInfo(String code, String nickName, String imgUrl) {
-    log.info("js_code:  =====   " + code + "    " + nickName + "    " + imgUrl);
-    UserStatusVo userStatusVo = userService.getUserInfo(code, nickName, imgUrl);
+  ResponseVo getUserInfo(@RequestBody AppLoginVo appLoginVo) {
+    if (appLoginVo == null) {
+      return ResponseVo.warn("参数为空！！");
+    }
+    log.info(
+        "js_code:  =====   " + appLoginVo.getCode() + "    " + appLoginVo.getNickName() + "    "
+            + appLoginVo.getImgUrl());
+    UserStatusVo userStatusVo = userService
+        .getUserInfo(appLoginVo.getCode(), appLoginVo.getNickName(), appLoginVo.getImgUrl());
     Map map = new HashMap(2);
     map.put("userStatusVo", userStatusVo);
     return ResponseVo.ok("请求成功", map);

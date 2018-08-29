@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +40,7 @@ public class HeatController extends BaseController {
   /**
    * 进入热饭页面
    */
-  @ApiOperation(value = "进入热饭列表页面")
+  @ApiOperation(value = "后台-进入热饭列表页面")
   @GetMapping("/heat")
   String toHeatingHtml() {
     log.info("进入热饭页面!");
@@ -67,9 +68,26 @@ public class HeatController extends BaseController {
   }
 
   /**
-   * 添加热饭
+   * 获取历史数据-总热饭人数
    */
-  @ApiOperation(value = "新增热饭")
+  @ApiOperation(value = "后台-获取历史数据-总热饭人数")
+  @GetMapping("/heat/history/{zoneName}")
+  @ResponseBody
+  ResponseVo getHistoryHeatSum(@PathVariable String zoneName) {
+    log.info("zoneName info：  " + zoneName);
+
+    if (zoneName == null || "".equals(zoneName)) {
+      return ResponseVo.warn("传参为null！");
+    }
+
+    Integer heatSum = heatService.getHistoryHeatSum(zoneName);
+    return ResponseVo.ok("获取成功!", heatSum);
+  }
+
+  /**
+   * 小程序-进入热饭等待队列
+   */
+  @ApiOperation(value = "进入热饭等待队列")
   @PostMapping("/app/heat")
   @ResponseBody
   ResponseVo insertHeatInfo(@RequestBody Heat heat) {
@@ -89,7 +107,7 @@ public class HeatController extends BaseController {
   }
 
   /**
-   * 开始热饭
+   * 小程序-开始热饭
    */
   @ApiOperation(value = "开始热饭")
   @PutMapping("/app/heat/start")
@@ -110,7 +128,7 @@ public class HeatController extends BaseController {
   }
 
   /**
-   * 结束热饭
+   * 小程序-结束热饭
    */
   @ApiOperation(value = "结束热饭")
   @PutMapping("/app/heat/over")
@@ -132,13 +150,18 @@ public class HeatController extends BaseController {
   }
 
   /**
-   * 获取结束热饭列表
+   * 小程序-获取结束热饭列表
    */
   @ApiOperation(value = "小程序-热饭列表")
   @GetMapping("/app/heats")
   @ResponseBody
   ResponseVo getHeatListForApp(String zoneName) {
     log.info("zone:   " + zoneName);
+
+    if (zoneName == null || "".equals(zoneName)) {
+      return ResponseVo.error("zoneName未传入!!!");
+    }
+
     List<HeatVo> heatVoList = heatService.getHeatListForApp(zoneName);
     if (heatVoList != null && heatVoList.size() > 0) {
       return ResponseVo.ok("获取成功", heatVoList);

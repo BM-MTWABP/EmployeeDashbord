@@ -49,11 +49,11 @@
                   <div class="col-sm-3">
                     <div class="ibox float-e-margins">
                       <div class="ibox-title">
-                        <span class="label label-primary pull-right">未使用</span>
+                        <span class="label label-primary pull-right" name="westMwStatusName"></span>
                         <h5>微波炉状态</h5>
                       </div>
                       <div class="ibox-content">
-                        <h1 class="no-margins">空闲</h1>
+                        <h1 class="no-margins" name="westMwStatusName"></h1>
                       </div>
                     </div>
                   </div>
@@ -61,7 +61,7 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-title">
                         <span class="label label-success pull-right">进行中</span>
-                        <h5>正在热饭</h5>
+                        <h5>正在热饭人数</h5>
                       </div>
                       <div class="ibox-content">
                         <h1 class="no-margins">1</h1>
@@ -86,7 +86,7 @@
                         <h5>总热饭人数</h5>
                       </div>
                       <div class="ibox-content">
-                        <h1 class="no-margins">275</h1>
+                        <h1 class="no-margins" name="westHeatSum">275</h1>
                       </div>
                     </div>
                   </div>
@@ -101,11 +101,11 @@
                   <div class="col-sm-3">
                     <div class="ibox float-e-margins">
                       <div class="ibox-title">
-                        <span class="label label-primary pull-right">未使用</span>
+                        <span class="label label-primary pull-right" name="eastMwStatusName"></span>
                         <h5>微波炉状态</h5>
                       </div>
                       <div class="ibox-content">
-                        <h1 class="no-margins">空闲</h1>
+                        <h1 class="no-margins" name="eastMwStatusName"></h1>
                       </div>
                     </div>
                   </div>
@@ -113,7 +113,7 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-title">
                         <span class="label label-success pull-right">进行中</span>
-                        <h5>正在热饭</h5>
+                        <h5>正在热饭人数</h5>
                       </div>
                       <div class="ibox-content">
                         <h1 class="no-margins">1</h1>
@@ -124,7 +124,7 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-title">
                         <span class="label label-warning pull-right">未开始</span>
-                        <h5>等待人数</h5>
+                        <h5>排队人数</h5>
                       </div>
                       <div class="ibox-content">
                         <h1 class="no-margins">5</h1>
@@ -138,7 +138,7 @@
                         <h5>总热饭人数</h5>
                       </div>
                       <div class="ibox-content">
-                        <h1 class="no-margins">275</h1>
+                        <h1 class="no-margins" name="eastHeatSum"></h1>
                       </div>
                     </div>
                   </div>
@@ -163,10 +163,9 @@
 <!-- 全局js -->
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-<!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
-<!-- jQuery UI -->
-<!--统计代码，可删除-->
+
+<script src="js/emjs/index_v3.js"></script>
 </body>
 
 </html>

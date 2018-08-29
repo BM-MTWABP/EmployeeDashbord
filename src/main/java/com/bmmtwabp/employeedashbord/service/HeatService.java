@@ -11,8 +11,6 @@ public interface HeatService {
 
   Integer insertHeat(Heat heat);
 
-  Integer readyHeat(String openId);
-
   Integer startHeat(String openId);
 
   Integer overHeat(String openId);
@@ -20,5 +18,7 @@ public interface HeatService {
   List<HeatVo> getHeatVoList(QueryHeatVo queryHeatVo);
 
   List<HeatVo> getHeatListForApp(String zoneName);
+
+  Integer getHistoryHeatSum(String zoneName);
 
 }

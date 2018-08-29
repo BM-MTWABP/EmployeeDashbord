@@ -37,8 +37,7 @@ public class ResponseVo extends HashMap<String, Object> {
     ResponseVo responseVo = new ResponseVo();
     responseVo.put("code", WARN);
     responseVo.put("msg", msg);
-    return responseVo
-        ;
+    return responseVo;
   }
 
   public static ResponseVo ok(Object msg, Object data) {

@@ -9,11 +9,15 @@
     <result column="start_time" jdbcType="VARCHAR" property="startTime"/>
     <result column="end_time" jdbcType="VARCHAR" property="endTime"/>
     <result column="heat_status" jdbcType="INTEGER" property="heatStatus"/>
-    <result column="zone" jdbcType="INTEGER" property="zone"/>
+    <result column="zone" jdbcType="VARCHAR" property="zone"/>
   </resultMap>
 
   <select id="getHeatInfo" resultMap="BaseResultMap">
     SELECT * FROM heating;
+  </select>
+
+  <select id="getHeatInfoByOpenId" resultMap="BaseResultMap">
+    SELECT * FROM heating heat WHERE heat.open_id=#{openId};
   </select>
 
   <insert id="insertHeat" keyProperty="id" useGeneratedKeys="true"
@@ -68,6 +72,16 @@
     INNER JOIN `user` u ON u.open_id=heat.open_id
     INNER JOIN dict dc ON dc.dict_value=heat.heat_status
     WHERE dc.dict_type='heat' AND heat.zone=#{zoneName};
+  </select>
+
+  <select id="getWaitFirstHeatUserOpenId" resultType="string">
+    SELECT heat.open_id FROM heating heat
+    WHERE heat.heat_status=0 and heat.zone=#{zoneName} LIMIT 0,1;
+  </select>
+
+  <select id="getHistoryHeatSum" resultType="int">
+    SELECT COUNT(*) FROM heating heat
+    WHERE heat.heat_status=3 AND heat.zone=#{zoneName};
   </select>
 
 </mapper>

@@ -38,14 +38,14 @@ public class HeatServiceImpl implements HeatService {
   }
 
   @Override
-  public Integer insertHeat(Heat heat) {
-    Integer result = heatMapper.insertHeat(heat);
-    return result;
+  public Integer getHistoryHeatSum(String zoneName) {
+    return heatMapper.getHistoryHeatSum(zoneName);
   }
 
   @Override
-  public Integer readyHeat(String openId) {
-    return heatMapper.readyHeat(openId);
+  public Integer insertHeat(Heat heat) {
+    Integer result = heatMapper.insertHeat(heat);
+    return result;
   }
 
   @Override
@@ -56,7 +56,31 @@ public class HeatServiceImpl implements HeatService {
 
   @Override
   public Integer overHeat(String openId) {
-    return heatMapper.overHeat(openId);
+    Heat heat = heatMapper.getHeatInfoByOpenId(openId);
+
+    if (heat == null) {
+      log.info("未找到当前用户热饭记录");
+      return 0;
+    }
+
+    String zoomName = heat.getZone();
+    log.info("热饭区域:   " + zoomName);
+    Integer result = heatMapper.overHeat(openId);
+    if (result == 1) {
+      log.info("结束热饭成功！");
+      String waitHeatUserOpenId = heatMapper.getWaitFirstHeatUserOpenId(zoomName);
+      if (waitHeatUserOpenId != null) {
+        heatMapper.readyHeat(waitHeatUserOpenId);
+        log.info("openid:  " + waitHeatUserOpenId + "   进入准备热饭状态!!");
+      } else {
+        log.info("当前没有等待热饭的人！");
+      }
+      return result;
+    } else {
+      log.info("结束热饭失败！");
+      return 0;
+    }
+
   }
 
   @Override
