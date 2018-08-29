@@ -20,7 +20,7 @@ public interface HeatMapper {
 
   Integer startHeat(@Param("openId") String openId, @Param("startTime") String startTime);
 
-  Integer overHeat(@Param("openId") String openId);
+  Integer overHeat(@Param("openId") String openId, @Param("endTime") String endTime);
 
   List<HeatVo> getHeatVoList(QueryHeatVo queryHeatVo);
 
@@ -29,5 +29,13 @@ public interface HeatMapper {
   String getWaitFirstHeatUserOpenId(@Param("zoneName") String zoneName);
 
   Integer getHistoryHeatSum(@Param("zoneName") String zoneName);
+
+  Integer getWaitHeatSum(@Param("zoneName") String zoneName);
+
+  Integer getReadyHeatSum(@Param("zoneName") String zoneName);
+
+  Integer getHeatingSum(@Param("zoneName") String zoneName);
+
+  String getHeatingNickName(@Param("zoneName") String zoneName);
 
 }

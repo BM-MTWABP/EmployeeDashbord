@@ -14,6 +14,8 @@ public class AdminUserVo implements Serializable {
 
   private String email;
 
+  private String adminNickName;
+
   private Integer type;
 
   private String adminType;

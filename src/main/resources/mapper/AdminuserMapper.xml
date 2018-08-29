@@ -7,6 +7,7 @@
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="username" jdbcType="VARCHAR" property="username"/>
     <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="admin_nickname" jdbcType="VARCHAR" property="adminNickName"/>
     <result column="email" jdbcType="VARCHAR" property="email"/>
     <result column="type" jdbcType="INTEGER" property="type"/>
     <result column="status" jdbcType="INTEGER" property="status"/>
@@ -15,7 +16,8 @@
   </resultMap>
 
   <select id="login" resultType="com.bmmtwabp.employeedashbord.vo.AdminUserVo">
-     SELECT au.id,username,email,type,dc.dict_name as adminType,status,au.img_path as imgPath
+     SELECT au.id,username,admin_nickname as adminNickName,email,type,dc.dict_name as adminType,status,
+     au.img_path as imgPath
      FROM admin_user au
      INNER JOIN dict dc ON dc.dict_value=au.type
      WHERE dc.dict_type='admin_type' AND au.username=#{username} AND au.password=#{password}

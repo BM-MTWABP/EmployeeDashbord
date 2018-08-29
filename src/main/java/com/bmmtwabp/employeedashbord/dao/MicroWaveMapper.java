@@ -15,4 +15,7 @@ public interface MicroWaveMapper {
 
   MicroWaveVo getMicroWaveInfoByZone(@Param("zoneName") String zoneName);
 
+  Integer updateMicroWaveStatus(@Param("microwaveStatus") Integer microwaveStatus,
+      @Param("zoneName") String zoneName);
+
 }

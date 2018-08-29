@@ -29,15 +29,12 @@ public class MicroWave implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Id
   @Column(name = "microwave_name")
   private String microwaveName;
 
-  @Id
   @Column(name = "microwave_status")
   private Integer microwaveStatus;
 
-  @Id
   @Column(name = "zone")
   private String zone;
 

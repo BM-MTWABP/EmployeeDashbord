@@ -6,6 +6,7 @@
   <resultMap id="BaseResultMap" type="com.bmmtwabp.employeedashbord.domain.Heat">
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+    <result column="wait_time" jdbcType="VARCHAR" property="waitTime"/>
     <result column="start_time" jdbcType="VARCHAR" property="startTime"/>
     <result column="end_time" jdbcType="VARCHAR" property="endTime"/>
     <result column="heat_status" jdbcType="INTEGER" property="heatStatus"/>
@@ -23,8 +24,8 @@
   <insert id="insertHeat" keyProperty="id" useGeneratedKeys="true"
     parameterType="com.bmmtwabp.employeedashbord.domain.Heat">
     INSERT INTO heating
-    (open_id,start_time,end_time,heat_status,zone)
-    VALUES(#{openId},#{startTime},#{endTime},#{heatStatus},#{zone})
+    (open_id,wait_time,heat_status,zone)
+    VALUES(#{openId},#{waitTime},#{heatStatus},#{zone})
   </insert>
 
   <update id="readyHeat">
@@ -33,19 +34,20 @@
   </update>
 
   <update id="startHeat">
-    UPDATE heating heat SET heat.heat_status=2,heat.start_time=#{startTime}
+    UPDATE heating heat SET heat.heat_status=2,heat.start_time=#{startTime},heat.wait_time=''
     WHERE heat.open_id=#{openId} AND heat.heat_status=1;
   </update>
 
   <update id="overHeat">
-    UPDATE heating heat SET heat.heat_status=3
+    UPDATE heating heat SET heat.heat_status=3,heat.end_time=#{endTime}
     WHERE heat.open_id=#{openId} AND heat.heat_status=2;
   </update>
 
   <select id="getHeatVoList" parameterType="com.bmmtwabp.employeedashbord.vo.QueryHeatVo"
     resultType="com.bmmtwabp.employeedashbord.vo.HeatVo">
     SELECT heat.id as heatId,heat.open_id as openId,u.nickname as nickName,u.user_img as imgUrl,
-    heat.start_time as startTime,heat.end_time as endTime,dc.dict_name as heatStatusName,heat.zone
+    heat.wait_time as waitTime,heat.start_time as startTime,heat.end_time as endTime,
+    dc.dict_name as heatStatusName,heat.zone
     as zoneName
     FROM heating heat
     INNER JOIN `user` u ON u.open_id=heat.open_id
@@ -77,6 +79,27 @@
   <select id="getWaitFirstHeatUserOpenId" resultType="string">
     SELECT heat.open_id FROM heating heat
     WHERE heat.heat_status=0 and heat.zone=#{zoneName} LIMIT 0,1;
+  </select>
+
+  <select id="getWaitHeatSum" resultType="int">
+    SELECT COUNT(*) FROM heating heat
+    WHERE heat.heat_status=0 AND heat.zone=#{zoneName};
+  </select>
+
+  <select id="getReadyHeatSum" resultType="int">
+    SELECT COUNT(*) FROM heating heat
+    WHERE heat.heat_status=1 AND heat.zone=#{zoneName};
+  </select>
+
+  <select id="getHeatingSum" resultType="int">
+    SELECT COUNT(*) FROM heating heat
+    WHERE heat.heat_status=2 AND heat.zone=#{zoneName};
+  </select>
+
+  <select id="getHeatingNickName" resultType="string">
+    SELECT u.nickname FROM `user` u INNER JOIN heating heat
+	  ON heat.open_id=u.open_id
+    WHERE heat.heat_status=2 AND heat.zone=#{zoneName}
   </select>
 
   <select id="getHistoryHeatSum" resultType="int">

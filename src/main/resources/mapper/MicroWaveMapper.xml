@@ -32,4 +32,9 @@
     WHERE mw.zone=#{zoneName} AND dc.dict_type='micorwave';
   </select>
 
+  <update id="updateMicroWaveStatus">
+    UPDATE microwave SET microwave.microwave_status=#{microwaveStatus}
+    WHERE microwave.zone=#{zoneName};
+  </update>
+
 </mapper>

@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date: 2018/8/27
  */
 @Slf4j
-@MapperScan("com.bmmtwabp.*.dao")
+@MapperScan("com.bmmtwabp.employeedashbord.dao")
 @SpringBootApplication
 public class EmployeedashbordApplication {
 

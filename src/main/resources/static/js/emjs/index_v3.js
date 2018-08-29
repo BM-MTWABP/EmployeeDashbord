@@ -8,6 +8,10 @@ $(function () {
 function loadData() {
   getWestMicrowaveInfo();
   getEastMicrowaveInfo();
+  getWestHeatingNickName();
+  getEastHeatingNickName();
+  getWestWaitHeatSum();
+  getEastWaitHeatSum();
   getWestHeatSum();
   getEastHeatSum();
 }
@@ -83,6 +87,72 @@ function getEastMicrowaveInfo() {
 }
 
 /**
+ * 获取等待人数
+ */
+function getWestWaitHeatSum() {
+  $.ajax({
+    url: 'heat/wait/' + westZoneName,
+    type: 'GET',
+    data: {},
+    success: function (res) {
+      if (res.code == '200') {
+        $("h1[name='westWaitHeatSum']").text(res.data);
+      } else {
+        console.log(res);
+      }
+    }
+  });
+}
+
+function getEastWaitHeatSum() {
+  $.ajax({
+    url: 'heat/wait/' + eastZoneName,
+    type: 'GET',
+    data: {},
+    success: function (res) {
+      if (res.code == '200') {
+        $("h1[name='eastWaitHeatSum']").text(res.data);
+      } else {
+        console.log(res);
+      }
+    }
+  });
+}
+
+/**
+ * 获取正在热饭的用户昵称
+ */
+function getWestHeatingNickName() {
+  $.ajax({
+    url: 'heat/heating/' + westZoneName,
+    type: 'GET',
+    data: {},
+    success: function (res) {
+      if (res.code == '200') {
+        $("h2[name='westHeatingNickName']").text(res.data);
+      } else {
+        $("h2[name='westHeatingNickName']").text('当前没有人热饭！');
+      }
+    }
+  });
+}
+
+function getEastHeatingNickName() {
+  $.ajax({
+    url: 'heat/heating/' + eastZoneName,
+    type: 'GET',
+    data: {},
+    success: function (res) {
+      if (res.code == '200') {
+        $("h2[name='eastHeatingNickName']").text(res.data);
+      } else {
+        $("h2[name='eastHeatingNickName']").text('当前没有人热饭！');
+      }
+    }
+  });
+}
+
+/**
  * 获取总热饭人数
  */
 function getWestHeatSum() {
@@ -92,7 +162,6 @@ function getWestHeatSum() {
     data: {},
     success: function (res) {
       if (res.code == '200') {
-        console.log(res.data);
         $("h1[name='westHeatSum']").text(res.data);
       } else {
         console.log(res);
@@ -108,7 +177,6 @@ function getEastHeatSum() {
     data: {},
     success: function (res) {
       if (res.code == '200') {
-        console.log(res.data);
         $("h1[name='eastHeatSum']").text(res.data);
       } else {
         console.log(res);

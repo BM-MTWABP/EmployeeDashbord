@@ -45,9 +45,13 @@ function tableInit() {
         field: 'nickName',
         title: '用户',
         formatter: function (value, row, index) {
-          return '<img alt="image" class="img-circle" style="width: 30px; height: 30px;" src='+row.imgUrl+'>&nbsp;&nbsp;<span>'
+          return '<img alt="image" class="img-circle" style="width: 30px; height: 30px;" src='
+              + row.imgUrl + '>&nbsp;&nbsp;<span>'
               + row.nickName + '</span>';
         }
+      }, {
+        field: 'waitTime',
+        title: '开始排队时间'
       }, {
         field: 'startTime',
         title: '热饭开始时间'

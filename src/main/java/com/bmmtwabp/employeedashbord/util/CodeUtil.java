@@ -29,4 +29,14 @@ public class CodeUtil {
    */
   public static final String AUTHORIZATIONCODE = "authorization_code";
 
+  /**
+   * 微波炉启用
+   */
+  public static final Integer MICROWAVEUSED = 1;
+
+  /**
+   * 微波炉未使用
+   */
+  public static final Integer MICROWAVENOTUSED = 0;
+
 }

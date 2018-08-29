@@ -25,15 +25,12 @@ public class Dict implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Id
   @Column(name = "dict_type")
   private String dictType;
 
-  @Id
   @Column(name = "dict_value")
   private String dictValue;
 
-  @Id
   @Column(name = "dict_name")
   private String dictName;
 

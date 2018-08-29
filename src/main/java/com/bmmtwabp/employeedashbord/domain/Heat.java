@@ -25,23 +25,21 @@ public class Heat implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Id
   @Column(name = "open_id")
   private String openId;
 
-  @Id
+  @Column(name = "wait_time")
+  private String waitTime;
+
   @Column(name = "start_time")
   private String startTime;
 
-  @Id
   @Column(name = "end_time")
   private String endTime;
 
-  @Id
   @Column(name = "heat_status")
   private Integer heatStatus;
 
-  @Id
   @Column(name = "zone")
   private String zone;
 

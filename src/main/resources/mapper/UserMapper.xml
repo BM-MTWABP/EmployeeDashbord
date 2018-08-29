@@ -29,7 +29,7 @@
 
   <select id="getUserHeatStatusByToday" resultType="int">
     SELECT heat_status FROM heating heat
-    WHERE heat.open_id=#{openId} AND heat.start_time LIKE CONCAT('%',#{startTime},'%')
+    WHERE heat.open_id=#{openId}
   </select>
 
 </mapper>

@@ -21,4 +21,8 @@ public interface HeatService {
 
   Integer getHistoryHeatSum(String zoneName);
 
+  Integer getWaitHeatSum(String zoneName);
+
+  String getHeatingNickName(String zoneName);
+
 }

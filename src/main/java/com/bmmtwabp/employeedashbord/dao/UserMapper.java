@@ -1,6 +1,7 @@
 package com.bmmtwabp.employeedashbord.dao;
 
 import com.bmmtwabp.employeedashbord.domain.User;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,6 @@ public interface UserMapper {
 
   Integer getUserCountByOpenId(@Param("openId") String openId);
 
-  Integer getUserHeatStatusByToday(@Param("openId") String openId,
-      @Param("startTime") String startTime);
+  List<Integer> getUserHeatStatusByToday(@Param("openId") String openId);
 
 }

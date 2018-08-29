@@ -29,19 +29,15 @@ public class User implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Id
   @Column(name = "open_id")
   private String openId;
 
-  @Id
   @Column(name = "nickname")
   private String nickName;
 
-  @Id
   @Column(name = "user_img")
   private String userImgPath;
 
-  @Id
   @Column(name = "zone")
   private Integer zone;
 

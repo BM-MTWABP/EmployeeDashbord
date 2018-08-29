@@ -25,31 +25,27 @@ public class AdminUser implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Id
   @Column(name = "username")
   private String username;
 
-  @Id
   @Column(name = "password")
   private String password;
 
-  @Id
+  @Column(name = "admin_nickname")
+  private String adminNickName;
+
   @Column(name = "email")
   private String email;
 
-  @Id
   @Column(name = "type")
   private Integer type;
 
-  @Id
   @Column(name = "status")
   private Integer status;
 
-  @Id
   @Column(name = "img_path")
   private String imgPath;
 
-  @Id
   @Column(name = "create_time")
   private String createTime;
 

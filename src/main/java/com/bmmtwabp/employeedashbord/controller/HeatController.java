@@ -68,6 +68,47 @@ public class HeatController extends BaseController {
   }
 
   /**
+   * 获取正在热饭的用户昵称
+   */
+  @ApiOperation(value = "后台-获取正在热饭的用户昵称")
+  @GetMapping("/heat/heating/{zoneName}")
+  @ResponseBody
+  ResponseVo getHeatingNickName(@PathVariable String zoneName) {
+    log.info("zoneName info：  " + zoneName);
+
+    if (zoneName == null || "".equals(zoneName)) {
+      return ResponseVo.warn("传参为null！");
+    }
+
+    String heatingNickName = heatService.getHeatingNickName(zoneName);
+    log.info("当前等待热饭人昵称：  " + heatingNickName);
+    if (heatingNickName != null && !"".equals(heatingNickName)) {
+      return ResponseVo.ok("获取成功!", heatingNickName);
+    } else {
+      return ResponseVo.warn("当前没有人热饭！");
+    }
+
+  }
+
+  /**
+   * 获取等待热饭人数
+   */
+  @ApiOperation(value = "后台-获取等待热饭人数")
+  @GetMapping("/heat/wait/{zoneName}")
+  @ResponseBody
+  ResponseVo getWaitHeatSum(@PathVariable String zoneName) {
+    log.info("zoneName info：  " + zoneName);
+
+    if (zoneName == null || "".equals(zoneName)) {
+      return ResponseVo.warn("传参为null！");
+    }
+
+    Integer waitHeatSum = heatService.getWaitHeatSum(zoneName);
+    log.info("当前等待热饭人数：  " + waitHeatSum);
+    return ResponseVo.ok("获取成功!", waitHeatSum);
+  }
+
+  /**
    * 获取历史数据-总热饭人数
    */
   @ApiOperation(value = "后台-获取历史数据-总热饭人数")
@@ -81,6 +122,7 @@ public class HeatController extends BaseController {
     }
 
     Integer heatSum = heatService.getHistoryHeatSum(zoneName);
+    log.info("获取历史数据-总热饭人数：  " + heatSum);
     return ResponseVo.ok("获取成功!", heatSum);
   }
 
@@ -118,9 +160,13 @@ public class HeatController extends BaseController {
       return ResponseVo.warn("新增对象为null!");
     }
 
+    if (heat.getOpenId() == null || "".equals(heat.getOpenId())) {
+      return ResponseVo.warn("openId为空！！");
+    }
+
     Integer result = heatService.insertHeat(heat);
     if (result == 1) {
-      return ResponseVo.ok("新增成功！！", null);
+      return ResponseVo.ok("新增成功！！", result);
     } else {
       return ResponseVo.error("新增失败~~");
     }

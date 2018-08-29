@@ -1,6 +1,7 @@
 package com.bmmtwabp.employeedashbord.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bmmtwabp.employeedashbord.dao.HeatMapper;
 import com.bmmtwabp.employeedashbord.dao.UserMapper;
 import com.bmmtwabp.employeedashbord.domain.User;
 import com.bmmtwabp.employeedashbord.service.UserService;
@@ -10,6 +11,7 @@ import com.bmmtwabp.employeedashbord.util.HttpRequestUtil;
 import com.bmmtwabp.employeedashbord.vo.UserStatusVo;
 import com.sun.tools.javac.jvm.Code;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
   @Resource
   private UserMapper userMapper;
 
+  @Resource
+  private HeatMapper heatMapper;
+
   @Override
   public Integer insertUser(User user) {
     return userMapper.insertUser(user);
@@ -41,15 +46,16 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserStatusVo getUserInfo(String code, String nickName, String imgUrl) {
-    Map map = new HashMap<>(5);
-    map.put("appid", CodeUtil.APPID);
-    map.put("secret", CodeUtil.APPSECRET);
-    map.put("js_code", code);
-    map.put("grant_type", CodeUtil.AUTHORIZATIONCODE);
+    Map paramMap = new HashMap<>(5);
+    paramMap.put("appid", CodeUtil.APPID);
+    paramMap.put("secret", CodeUtil.APPSECRET);
+    paramMap.put("js_code", code);
+    paramMap.put("grant_type", CodeUtil.AUTHORIZATIONCODE);
+
     try {
-      String result = HttpRequestUtil.httpGet(CodeUtil.WEIXINLOGIN, map);
+
+      String result = HttpRequestUtil.httpGet(CodeUtil.WEIXINLOGIN, paramMap);
       JSONObject jsonObject = JSONObject.parseObject(result);
-      String sessionKey = (String) jsonObject.get("session_key");
       String openId = (String) jsonObject.get("openid");
 
       UserStatusVo userStatusVo = new UserStatusVo();
@@ -57,8 +63,11 @@ public class UserServiceImpl implements UserService {
       if (openId != null && !"".equals(openId)) {
         userStatusVo.setOpenId(openId);
         Integer userCount = getUserCountByOpenId(openId);
-        log.info("找到用户{}", userCount);
+
         switch (userCount) {
+          /**
+           * 新用户
+           */
           case 0:
             User user = new User();
             user.setOpenId(openId);
@@ -75,16 +84,26 @@ public class UserServiceImpl implements UserService {
             }
             break;
           case 1:
-            String dateTime = DateUtil.getDateTime().substring(0, 10);
-            Integer userHeatStatus = userMapper.getUserHeatStatusByToday(openId, dateTime);
-            userStatusVo.setUserHeatStatus(userHeatStatus);
+            /**
+             * 已有用户
+             */
+            log.info("openId：  " + openId);
+            List<Integer> userHeatStatusList = userMapper.getUserHeatStatusByToday(openId);
+            if (userHeatStatusList != null && userHeatStatusList.size() > 0) {
+
+              Integer histroyHeatStatus = userHeatStatusList.get(userHeatStatusList.size() - 1);
+              log.info("用户状态：  " + histroyHeatStatus);
+              userStatusVo.setUserHeatStatus(histroyHeatStatus);
+            }
             log.info("该用户已存在!!!");
             break;
           default:
             break;
         }
+
         log.info("userStatusVo info:    " + userStatusVo);
         return userStatusVo;
+
       } else {
         log.info("未获取到openId！！  ");
         return null;

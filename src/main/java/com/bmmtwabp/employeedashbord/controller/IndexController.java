@@ -84,6 +84,7 @@ public class IndexController {
         return ResponseVo.warn("账号被禁用!");
       }
       HttpSession session = request.getSession();
+      session.setMaxInactiveInterval(30 * 60);
       session.setAttribute("sessionid", session.getId());
       session.setAttribute("adminUserInfo", adminUserVo);
       return ResponseVo.ok("登录成功!!", null);

@@ -17,9 +17,9 @@ public class HeatVo implements Serializable {
   private String imgUrl;
 
   /**
-   * 热饭准备时间
+   * 进入排队时间
    */
-  private String readyTime;
+  private String waitTime;
 
   /**
    * 热饭开始时间
