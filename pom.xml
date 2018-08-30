@@ -26,6 +26,7 @@
   </properties>
 
   <dependencies>
+    <!--spring boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -34,6 +35,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <!--spring boot -->
 
     <!--swagger -->
     <dependency>
@@ -68,8 +70,14 @@
       <artifactId>pagehelper-spring-boot-starter</artifactId>
       <version>1.2.5</version>
     </dependency>
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
+      <version>1.0</version>
+    </dependency>
     <!--  DB  -->
 
+    <!--  Util -->
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
@@ -85,12 +93,8 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.31</version>
     </dependency>
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>persistence-api</artifactId>
-      <version>1.0</version>
-    </dependency>
   </dependencies>
+  <!--  Util -->
 
   <build>
     <plugins>

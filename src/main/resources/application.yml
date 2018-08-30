@@ -14,7 +14,7 @@ spring:
       # 数据库访问配置, 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/employeeservice_db?useUnicode=true&characterEncoding=UTF-8
+      url: jdbc:mysql://118.31.40.6:3306/employeeservice_db?useUnicode=true&characterEncoding=UTF-8
       username: root
       password: 123456
       # 连接池配置
@@ -52,3 +52,5 @@ pagehelper:
   params: count=countSql
 swagger:
   enabled: true
+logging:
+  config: classpath:/logback-spring.xml
